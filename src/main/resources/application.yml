@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: "default"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scrum
+    username: carddealer
+    password: fullH0uz3
+  jpa:
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
