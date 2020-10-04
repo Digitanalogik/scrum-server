@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/room")
 public class RoomController {
@@ -15,6 +17,11 @@ public class RoomController {
 
     @Autowired
     RoomService roomService;
+
+    @GetMapping(path = "/list")
+    public List<Room> listRooms() {
+        return roomService.listRooms();
+    }
 
     @PostMapping(path = "/create/{room}")
     public Room createRoom(@PathVariable String room, @RequestParam(name = "secret", defaultValue = "") String password ) {

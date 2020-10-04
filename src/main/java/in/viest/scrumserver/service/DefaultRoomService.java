@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class DefaultRoomService implements RoomService {
@@ -43,5 +43,10 @@ public class DefaultRoomService implements RoomService {
         roomRepository.save(r);
 
         return r;
+    }
+
+    @Override
+    public List<Room> listRooms() {
+        return (List<Room>) roomRepository.findAll();
     }
 }

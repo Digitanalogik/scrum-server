@@ -15,7 +15,7 @@ public class DefaultVoteService implements VoteService {
     private static final Logger log = LoggerFactory.getLogger(DefaultVoteService.class);
 
     @Autowired
-    private  final VoteRepository voteRepository;
+    private final VoteRepository voteRepository;
 
     public DefaultVoteService(VoteRepository voteRepository) {
         this.voteRepository = voteRepository;
