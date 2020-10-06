@@ -1,33 +1,36 @@
 package in.viest.scrumserver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "room")
 public class Room {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POKER_ROOM_ID")
-    @SequenceGenerator(name = "POKER_ROOM_ID", sequenceName = "POKER_ROOM_ID", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String name;
+
     private String password;
 
+    @OneToMany(mappedBy = "room")
+    private List<Player> players;
+
     public Room() {
+        this.players = new ArrayList<>();
     }
 
     public Room(String name) {
         this.name = name;
+        this.players = new ArrayList<>();
     }
 
     public Room(String name, String password) {
         this.name = name;
         this.password = password;
+        this.players = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -52,5 +55,13 @@ public class Room {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }
