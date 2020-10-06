@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class DefaultRoomService implements RoomService {
 
-    private static final Logger log = LoggerFactory.getLogger(DefaultVoteService.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultRoomService.class);
 
     @Autowired
     private final RoomRepository roomRepository;
@@ -52,10 +52,15 @@ public class DefaultRoomService implements RoomService {
                 .orElse(new Room(name, password));
 
          */
-        Room r = new Room(name);
+        Room r = new Room(name, password);
         roomRepository.save(r);
 
         return r;
+    }
+
+    @Override
+    public Optional<Room> get(Integer id) {
+        return roomRepository.findById(id);
     }
 
     @Override
@@ -69,6 +74,12 @@ public class DefaultRoomService implements RoomService {
     }
 
     @Override
+    public List<Player> listPlayersInRoom(Integer room) {
+        log.info("PlayerService was requested to list players in the room id " + room);
+        return playerService.listPlayersInRoom(room);
+    }
+
+    @Override
     public List<Player> listPlayersInRoom(String room) {
         log.info("RoomService was requested to list players in the room " + room);
         Optional<Room> r = roomRepository.findByName(room);
@@ -76,7 +87,7 @@ public class DefaultRoomService implements RoomService {
             log.info("RoomService is listing players in the room " + room);
             List<Player> players = playerService.listPlayers()
                     .stream()
-                    .filter(p -> p.getRoom() == r.get())
+                    .filter(p -> p.getRoom() == r.get().getId())
                     .collect(Collectors.toList());
             return players;
         }

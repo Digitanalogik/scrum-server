@@ -11,8 +11,10 @@ public interface RoomService {
     Room create(String name);
     Room create(String name, String password);
 
+    Optional<Room> get(Integer id);
     Optional<Room> get(String name);
 
     List<Room> listRooms();
+    List<Player> listPlayersInRoom(Integer room);
     List<Player> listPlayersInRoom(String room);
 }

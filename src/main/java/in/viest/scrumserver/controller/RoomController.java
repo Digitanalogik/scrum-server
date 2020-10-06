@@ -34,7 +34,7 @@ public class RoomController {
     @GetMapping(path = "/{room}/players")
     public List<Player> listPlayersInRooms(@PathVariable String room) {
         log.info("RoomController is listing players in room " + room);
-        return playerService.listPlayersInRoom(room);
+        return roomService.listPlayersInRoom(room);
     }
 
     @PostMapping(path = "/create/{room}")
@@ -56,15 +56,14 @@ public class RoomController {
     @Transactional
     @PostMapping("/{room}/join/{player}")
     public String join(@PathVariable String room, @PathVariable String player) {
-        log.info("Client requested player " + player + " to join room " + room);
+        log.info("Player [" + player + "] wants to join room " + room);
         Optional<Player> p = playerService.get(player);
         if (p.isPresent()) {
-            log.info("RoomController found the player " + p.get().getName());
+            log.info("RoomController found the player " + p.get().getName() + " (id:" + p.get().getId() + ")");
             Optional<Room> r = roomService.get(room);
             if (r.isPresent()) {
-                //r.get().getPlayers().add(p.get());
-                p.get().setRoom(r.get());
-                log.info("Player " + p.get().getName() + " joined room " + r.get().getName());
+                p.get().setRoom(r.get().getId());
+                log.info("Player [" + p.get().getName() + "] joined room " + r.get().getName() + " (id:" + r.get().getId() + ")");
             }
             return "OK";
         }

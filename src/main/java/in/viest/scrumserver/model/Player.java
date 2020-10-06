@@ -11,11 +11,12 @@ public class Player {
     private Integer id;
     private String name;
     private String photo;
-    private Integer points;
+    private Integer vote;
+    private Integer room;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private Room room;
+    //@ManyToOne
+    //@JoinColumn(name = "fk_room")
+    //private Room room;
 
     public Player() {
     }
@@ -24,9 +25,20 @@ public class Player {
         this.name = name;
     }
 
+    public Player(String name, Integer room) {
+        this.name = name;
+        this.room = room;
+    }
+
     public Player(String name, String photo) {
         this.name = name;
         this.photo = photo;
+    }
+
+    public Player(String name, String photo, Integer room) {
+        this.name = name;
+        this.photo = photo;
+        this.room = room;
     }
 
     public Integer getId() {
@@ -53,19 +65,22 @@ public class Player {
         this.photo = photo;
     }
 
-    public Integer getPoints() {
-        return points;
+    public Integer getVote() {
+        return vote;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
+    public void setVote(Integer vote) {
+        this.vote = vote;
     }
 
-    public Room getRoom() {
+    public Integer getRoom() {
         return room;
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(Integer room) {
         this.room = room;
     }
 }
+
+
+

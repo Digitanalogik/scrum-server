@@ -33,24 +33,36 @@ public class DefaultPlayerService implements PlayerService {
     @Override
     @Transactional
     public Player create(String name) {
-
-        log.info("Creating new player: " + name);
-
+        log.info("New Player [" + name + "]");
         Player p = new Player(name);
         playerRepository.save(p);
+        return p;
+    }
 
+    @Override
+    @Transactional
+    public Player create(String name, Integer room) {
+        log.info("Room " + room + ": New Player [" + name + "]");
+        Player p = new Player(name, room);
+        playerRepository.save(p);
         return p;
     }
 
     @Override
     @Transactional
     public Player create(String name, String photo) {
-
-        log.info("Creating new player: " + name + " with photo from URL: " + photo);
-
+        log.info("New Player [" + name + "] with photo url: " + photo);
         Player p = new Player(name, photo);
         playerRepository.save(p);
+        return p;
+    }
 
+    @Override
+    @Transactional
+    public Player create(String name, String photo, Integer room) {
+        log.info("Room " + room + ": New Player [" + name + "] with photo url: " + photo);
+        Player p = new Player(name, photo);
+        playerRepository.save(p);
         return p;
     }
 
@@ -60,8 +72,19 @@ public class DefaultPlayerService implements PlayerService {
     }
 
     @Override
+    public Optional<Player> get(Integer id) {
+        return playerRepository.findById(id);
+    }
+
+    @Override
     public List<Player> listPlayers() {
         return playerRepository.findAll();
+    }
+
+    @Override
+    public List<Player> listPlayersInRoom(Integer room) {
+        log.info("PlayerService was requested to list players in the room id " + room);
+        return playerRepository.findByRoom(room).stream().collect(Collectors.toList());
     }
 
     @Override
@@ -72,7 +95,7 @@ public class DefaultPlayerService implements PlayerService {
             log.info("PlayerService is listing players in the room " + room);
             List<Player> players = playerRepository.findAll()
                     .stream()
-                    .filter(p -> p.getRoom() == r.get())
+                    .filter(p -> p.getRoom() == r.get().getId())
                     .collect(Collectors.toList());
             return players;
         }

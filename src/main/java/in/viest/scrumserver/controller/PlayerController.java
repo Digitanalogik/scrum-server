@@ -33,6 +33,7 @@ public class PlayerController {
     @PostMapping(path = "/create/{name}")
     public Player createPlayer(@PathVariable String name,
                                @RequestParam(name = "room", defaultValue = "") String room,
+                               @RequestParam(name = "rid", defaultValue = "") String roomId,
                                @RequestParam(name = "photo", defaultValue = "") String photo) {
         log.info("Client requested to create a player called " + name);
         Player player = null;
@@ -42,14 +43,23 @@ public class PlayerController {
             } else {
                 player = playerService.create(name, photo);
             }
-            Optional<Room> r = roomService.get(room);
-            if (r.isPresent()) {
-                //player.setRoom(r.get());
-                r.get().getPlayers().add(player);
+            log.info("Created player " + player.getName());
+            if (!roomId.equals("") && Integer.valueOf(roomId) > 0) {
+                log.info("Processing optional parameter room id: " + roomId);
+                player.setRoom(Integer.valueOf(roomId));
+            }
+            if (!room.equals("")) {
+                log.info("Processing optional parameter room: " + room);
+                Optional<Room> r = roomService.get(room);
+                if (r.isPresent()) {
+                    log.info("Room " + room + " was found. Joining player " + name);
+                    player.setRoom(r.get().getId());
+                }
             }
         } catch (Exception e) {
             log.error("Error creating player: " + e.getMessage());
         }
+        log.info("Player created!");
         return player;
     }
 }

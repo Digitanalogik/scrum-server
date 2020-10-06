@@ -10,27 +10,25 @@ public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
-
     private String password;
 
-    @OneToMany(mappedBy = "room")
-    private List<Player> players;
+    //@OneToMany(mappedBy = "room")
+    //private List<Player> players;
 
     public Room() {
-        this.players = new ArrayList<>();
+        //this.players = new ArrayList<>();
     }
 
     public Room(String name) {
         this.name = name;
-        this.players = new ArrayList<>();
+        //this.players = new ArrayList<>();
     }
 
     public Room(String name, String password) {
         this.name = name;
         this.password = password;
-        this.players = new ArrayList<>();
+        //this.players = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -57,6 +55,7 @@ public class Room {
         this.password = password;
     }
 
+    /*
     public List<Player> getPlayers() {
         return players;
     }
@@ -64,4 +63,5 @@ public class Room {
     public void setPlayers(List<Player> players) {
         this.players = players;
     }
+     */
 }

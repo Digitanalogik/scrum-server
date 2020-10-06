@@ -12,4 +12,5 @@ public interface PlayerRepository extends CrudRepository<Player, Integer> {
     List<Player> findAll();
     Optional<Player> findById(Integer id);
     Optional<Player> findByName(String name);
+    Optional<Player> findByRoom(Integer room);
 }
