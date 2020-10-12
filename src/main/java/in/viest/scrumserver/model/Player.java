@@ -6,8 +6,6 @@ import javax.persistence.*;
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POKER_PLAYER_ID")
-    @SequenceGenerator(name = "POKER_PLAYER_ID", sequenceName = "POKER_PLAYER_ID", allocationSize = 1)
     private Integer id;
     private String name;
     private String photo;

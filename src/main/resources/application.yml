@@ -12,4 +12,3 @@ spring:
       dialect: org.hibernate.dialect.PostgreSQLDialect
       ddl-auto: create-drop
     generate-ddl: true
-

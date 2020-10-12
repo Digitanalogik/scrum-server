@@ -10,12 +10,13 @@
     </parent>
     <groupId>in.viest</groupId>
     <artifactId>scrum-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3</version>
     <name>scrum-server</name>
     <description>Scrum Poker Backend</description>
 
     <properties>
         <java.version>11</java.version>
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <dependencies>
