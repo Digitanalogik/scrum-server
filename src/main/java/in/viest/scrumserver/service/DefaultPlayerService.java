@@ -33,7 +33,7 @@ public class DefaultPlayerService implements PlayerService {
     @Override
     @Transactional
     public Player create(String name) {
-        log.info("New Player [" + name + "]");
+        // log.info("New Player [" + name + "]");
         Player p = new Player(name);
         playerRepository.save(p);
         return p;
@@ -51,7 +51,7 @@ public class DefaultPlayerService implements PlayerService {
     @Override
     @Transactional
     public Player create(String name, String photo) {
-        log.info("New Player [" + name + "] with photo url: " + photo);
+        // log.info("New Player [" + name + "] with photo url: " + photo);
         Player p = new Player(name, photo);
         playerRepository.save(p);
         return p;
@@ -60,7 +60,7 @@ public class DefaultPlayerService implements PlayerService {
     @Override
     @Transactional
     public Player create(String name, String photo, Integer room) {
-        log.info("Room " + room + ": New Player [" + name + "] with photo url: " + photo);
+        // log.info("Room " + room + ": New Player [" + name + "] with photo url: " + photo);
         Player p = new Player(name, photo);
         playerRepository.save(p);
         return p;

@@ -10,5 +10,5 @@ spring:
   jpa:
     hibernate:
       dialect: org.hibernate.dialect.PostgreSQLDialect
-      ddl-auto: create-drop
+      ddl-auto: create
     generate-ddl: true

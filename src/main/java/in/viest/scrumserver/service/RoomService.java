@@ -17,4 +17,8 @@ public interface RoomService {
     List<Room> listRooms();
     List<Player> listPlayersInRoom(Integer room);
     List<Player> listPlayersInRoom(String room);
+
+    Boolean allPlayersVoted(String room);
+    int totalPlayersInRoom(String room);
+    int votedPlayersInRoom(String room);
 }

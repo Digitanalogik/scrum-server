@@ -35,7 +35,7 @@ public class PlayerController {
                                @RequestParam(name = "room", defaultValue = "") String room,
                                @RequestParam(name = "rid", defaultValue = "") String roomId,
                                @RequestParam(name = "photo", defaultValue = "") String photo) {
-        log.info("Client requested to create a player called " + name);
+        // log.info("Client requested to create a player called " + name);
         Player player = null;
         try {
             if (photo.equals("")) {
@@ -59,7 +59,7 @@ public class PlayerController {
         } catch (Exception e) {
             log.error("Error creating player: " + e.getMessage());
         }
-        log.info("Player created!");
+        // log.info("Player created!");
         return player;
     }
 }

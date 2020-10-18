@@ -6,6 +6,8 @@ import javax.persistence.*;
 public class Player {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "POKER_PLAYER_ID")
+    @SequenceGenerator(name = "POKER_PLAYER_ID", sequenceName = "POKER_PLAYER_ID", allocationSize = 1)
     private Integer id;
     private String name;
     private String photo;
@@ -77,6 +79,17 @@ public class Player {
 
     public void setRoom(Integer room) {
         this.room = room;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", photo='" + photo + '\'' +
+                ", vote=" + vote +
+                ", room=" + room +
+                '}';
     }
 }
 
